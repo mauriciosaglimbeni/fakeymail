@@ -14,7 +14,8 @@ Encore
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
     .copyFiles({
-        from: './uploads'
+        from: './uploads',
+        pattern: /\.(png|jpg|jpeg)$/
     })
     /*
      * ENTRY CONFIG
