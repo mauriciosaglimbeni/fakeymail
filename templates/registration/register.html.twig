@@ -1,5 +1,5 @@
 {%block sidebar%}
-<b>Fakey-Gram</b>
+<h1 >Fakey-Mail</h1>
 {%endblock%}
 
 {% block body %}
@@ -7,17 +7,23 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+    <h2 class="h3 mb-3 font-weight-light">Register:</h2>
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email,
             {label: 'E-Mail :  ' })}}
+            <br/>
         {{ form_row(registrationForm.name,
            { label: 'Full Name :  ' })}}
+           <br/>
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password :  '
         }) }}
+        <br/>
         {{ form_row(registrationForm.pfp)}}
+        <br/>
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
+    
+    <a href="/login">Already have an account? Log-In here!</a>
 {% endblock %}
