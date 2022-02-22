@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+ <link href="{{ asset('build/app.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+{% block title %}FakeyMail-Message {{app.user.name}}{% endblock %}
+{% block body %}
+<div class="example-wrapper">
+    <h3> Message:</h3>
+    <div class="msgBox" style="margin-left:2em;border:1px black solid;width:75%;padding:20px;">
+        <span class="subtitle">Subject: </span><h2 class="title" style="margin-left: 1em;">{{message.getSubject()}}</h2>
+        <span class="subtitle"> From:  <u>{{message.sender}}</u></span>
+        <span class="subtitle" style="margin-left:15px;"> To:  <u>{{message.recipient}}</u></span>
+        <br/>
+        <br/>
+         <span class="subtitle"> Message:</span>
+         <p class="msg" style="margin-left: 2em;">"{{message.message}}"</p>
+         {%if message.image != NULL%}
+            <img src="{{ asset('uploads/'~message.image) }}"style="height:250px;margin-left:15px" alt="img here"/>
+        {%endif%}
+         {%if message.file != NULL%}´
+            <embed src="{{asset('uploads/'~message.file) }}" width="250" height="250" 
+                type="application/pdf">
+         {%endif%}
+    </div>
+</div>
+{% endblock %}

@@ -16,7 +16,7 @@
             <span><a href="/dashboard">Inbox</a></span>
             <span><a href="/outbox">Outbox</a></span>
             <span><a href="/logout">Log-Out</a></span>
-            <span><a href="/profile">  <img src="{{ asset('uploads/'~app.user.pfp) }}"style="height:50px" alt="pfp here"/></a></span>  
+            <span><a href={{'/profile?email='~app.user.email}}>  <img src="{{ asset('uploads/'~app.user.pfp) }}"style="height:50px;width:50px;border-radius:50%" alt="pfp here"/></a></span>  
         </nav>
          {% endblock %}
         {% block body %}{% endblock %}
