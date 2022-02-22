@@ -20,10 +20,14 @@ class DashboardController extends AbstractController
     {
         /** @var \App\Entity\User */
         $user = $this->getUser();
+        $email = $user->getEmail();
+        $messages = $messageRepository ->createQueryBuilder('m')
+            ->andWhere("m.recipient = :val")
+            ->setParameter('val', $email)
+            ->orderBy('m.created_at', 'DESC')
+            ->getQuery()
+            ->getResult();
         
-        $messages = $messageRepository ->findBy(
-            ['recipient' => $user->getEmail()]
-        );
 
             return $this->render('pages/index.html.twig',[
                 'messages' => $messages

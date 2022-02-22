@@ -20,9 +20,12 @@ class OutboxController extends AbstractController
     {
         /** @var \App\Entity\User */
         $user = $this->getUser();
-        $messages = $messageRepository ->findBy(
-            ['sender' => $user->getEmail()]
-        );
+        $messages = $messageRepository ->createQueryBuilder('m')
+        ->andWhere("m.sender = :val")
+        ->setParameter('val', $user->getEmail())
+        ->orderBy('m.created_at', 'DESC')
+        ->getQuery()
+        ->getResult();
 
             return $this->render('pages/outbox.html.twig',[
                 'messages' => $messages

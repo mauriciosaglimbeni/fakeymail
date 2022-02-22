@@ -8,14 +8,21 @@
     <h2 class="title">Inbox</h2>
 
     {%if messages != null%} 
-        <table>    
-            <tr><th>From</th><th>Subject</th></tr>
+        <table  cellspacing="20" cellpadding="5" style="border:black 1px solid; width:70%">        
+           <tr><th>From</th><th>Subject</th> <th> Read</th> <th> Date </th></tr>
             {% for message in messages %}
                 <tr><td>{{message.sender}}</td>
                 {% if message.getIsRead() == false %}
-                   <td > <b> <a href="#"class="no-deco">  {{message.subject}} </a></b></td></tr>
+                   <td> <b> <a href="#" class="no-deco">  {{message.subject}}</a></b></td>
+                   <td> Not read</td>
+                   <td> {{message.getCreatedAt()|date("H:i m/d/Y ") }}</td>
+                   </tr>
+                   
                 {% else %}
-                    <td ><a href="#"class="no-deco">  {{message.subject}}</a></td>
+                    <td><a href="#" class="no-deco">  {{message.subject}} </a></td>
+                    <td> Read</td>
+                     <td> {{message.getCreatedAt()|date("H:i m/d/Y ") }}</td>
+                    </tr>
                 {% endif %}
             {% endfor %}
         </table>
