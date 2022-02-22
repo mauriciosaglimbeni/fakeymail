@@ -6,5 +6,9 @@ Check out the basic functionality and extension for information on the functiona
 ## Requirements and launch:
 
 ## Basic Functionality:
+-Login.
+-Sending Messages.
+-Receiving messages.
+-Viewing received and sent messages with their subject, date and if they have been read.
 
 ## Extensions made:
