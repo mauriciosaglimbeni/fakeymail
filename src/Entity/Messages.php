@@ -31,6 +31,12 @@ class Messages
     #[ORM\Column(type: 'string', length: 255)]
     private $recipient;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $image;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $file;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +110,30 @@ class Messages
     public function setRecipient(string $recipient): self
     {
         $this->recipient = $recipient;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getFile(): ?string
+    {
+        return $this->file;
+    }
+
+    public function setFile(?string $file): self
+    {
+        $this->file = $file;
 
         return $this;
     }

@@ -1,3 +1,23 @@
 body {
     background-color: lightgray;
 }
+nav{
+    border:2px solid black;
+}
+.fakeygram{
+    display:inline-block;
+    font-size:2em;
+    margin-left:1em;
+}
+span a{
+    font-size:1.1em;
+    color:black;
+    text-decoration:none;
+    margin-left:5%;
+}
+span a:hover{
+    color:gray;
+}
+span img{
+    float:right;position:relative;top:19px;right:16px;
+}

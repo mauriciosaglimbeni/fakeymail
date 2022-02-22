@@ -1,3 +1,4 @@
+{% extends 'base.html.twig' %}
 {%block sidebar%}
 <h1 >Fakey-Mail</h1>
 {%endblock%}
@@ -25,5 +26,5 @@
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
     
-    <a href="/login">Already have an account? Log-In here!</a>
+    <a href="/">Already have an account? Log-In here!</a>
 {% endblock %}

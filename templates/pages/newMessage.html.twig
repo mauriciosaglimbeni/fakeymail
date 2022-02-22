@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+ <link href="{{ asset('build/app.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+{% block title %}FakeyMail-New Message}!{% endblock %}
+{% block body %}
+     <h2 class="h3 mb-3 font-weight-light title">New Message:</h2>
+
+    {{ form_start(newMessageForm) }}
+        {{ form_row(newMessageForm.subject,
+            {label: 'Subject :  ' })}}
+            <br/>
+        {{ form_row(newMessageForm.message,
+           { label: 'Message :  ' })}}
+           <br/>
+        {{ form_row(newMessageForm.recipient, {
+            label: 'Recipient :  '
+        }) }}
+        <br/>
+        {{ form_row(newMessageForm.image)}}
+        <br/>
+        {{ form_row(newMessageForm.file)}}
+        <br/>
+        <button type="submit" class="btn">Send Message</button>
+    {{ form_end(newMessageForm) }}
+{%endblock%}

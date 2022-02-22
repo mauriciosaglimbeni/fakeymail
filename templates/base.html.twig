@@ -4,38 +4,19 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <spannk rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        <style>
-        nav{
-            border:2px solid black;
-        }
-        .fakeygram{
-            display:inline-block;
-            font-size:2em;
-            margin-left:1em;
-        }
-        span a{
-            font-size:1.1em;
-            color:black;
-            text-decoration:none;
-            margin-left:5%;
-        }
-        span a:hover{
-            color:gray;
-        }
-        span img{
-            float:right;position:relative;top:19px;right:16px;
-        }
-        </style>
+            {% block stylesheets %}
+         <link href="{{ asset('build/app.css') }}" type="text/css" rel="stylesheet" />
+        {% endblock %}
     </head>
     <body>
         {%block sidebar%}
         <nav>
             <h1 class="fakeygram"> Fakey-Mail</h1>
-            <span><a href="#">New Message</a></span>
-            <span><a href="#">Inbox</a></span>
-            <span><a href="#">Outbox</a></span>
+            <span><a href="/newMessage">New Message</a></span>
+            <span><a href="/dashboard">Inbox</a></span>
+            <span><a href="/outbox">Outbox</a></span>
             <span><a href="/logout">Log-Out</a></span>
-            <span><a href="#">  <img src="{{ asset('uploads/'~app.user.pfp) }}"style="height:50px" alt="pfp here"/></a></span>  
+            <span><a href="/profile">  <img src="{{ asset('uploads/'~app.user.pfp) }}"style="height:50px" alt="pfp here"/></a></span>  
         </nav>
          {% endblock %}
         {% block body %}{% endblock %}

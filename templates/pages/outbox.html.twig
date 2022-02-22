@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+ <link href="{{ asset('build/app.css') }}" type="text/css" rel="stylesheet" />
+</style>
+{% endblock %}
+{% block title %}FakeyMail-Outbox {{app.user.name}}!{% endblock %}
+{% block body %}
+
+<div class="example-wrapper">
+    <h2 class="title">Outbox</h2>
+
+    {%if messages != null%} 
+        <table>    
+            <tr><th>To</th><th>Subject</th></tr>
+            {% for message in messages %}
+                <tr><td>{{message.recipient}}</td>
+                {% if message.getIsRead() == false %}
+                   <td> <b> <a href="#">  {{message.subject}}-read </a></b>-not read</td></tr>
+                {% else %}
+                    <td><a href="#">  {{message.subject}}-read </a></td>
+                {% endif %}
+            {% endfor %}
+        </table>
+    {%else%}
+        <h3 class="alert"> No sent messages yet!</h3>
+        {%endif%}
+    
+</div>
+{% endblock %}
