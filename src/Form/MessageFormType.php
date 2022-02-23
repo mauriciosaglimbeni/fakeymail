@@ -24,13 +24,13 @@ class MessageFormType extends AbstractType
             // ->add('created_at')
             // ->add('is_read')
             // ->add('sender')
-        ->add('recipient')
-            // -> add('recipient',EntityType::class,[
+            //  ->add('recipient',EntityType::class,[
             //     'class' => User::class,
             //     'choice_label' => 'email',
             //     'multiple' => true,
-            //     'expanded' => true
+            //     // 'expanded' => true,
             // ])
+ 
             ->add('image', FileType::class, [
                 'label' => "Insert an image:  ",
                 'mapped' => false,

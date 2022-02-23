@@ -5,8 +5,9 @@
 {% block title %}FakeyMail-Message {{app.user.name}}{% endblock %}
 {% block body %}
 <div class="example-wrapper">
-    <h3> Message:</h3>
-    <div class="msgBox" style="margin-left:2em;border:1px black solid;width:75%;padding:20px;">
+    <h2> Message:</h2>
+    </div>
+    <div class="msgBox" style="margin-left:0.1em;border:1px black solid;;padding:2em;background:rgba(9, 116, 237, 0.4);font-size:1.1em;">
         <span class="subtitle">Subject: </span><h2 class="title" style="margin-left: 1em;">{{message.getSubject()}}</h2>
         <span class="subtitle"> From:  <u>{{message.sender}}</u></span>
         <span class="subtitle" style="margin-left:15px;"> To:  <u>{{message.recipient}}</u></span>
@@ -22,5 +23,5 @@
                 type="application/pdf">
          {%endif%}
     </div>
-</div>
+
 {% endblock %}

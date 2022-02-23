@@ -2,25 +2,37 @@
 {% block stylesheets %}
  <link href="{{ asset('styles.css') }}" type="text/css" rel="stylesheet" />
 {% endblock %}
-{% block title %}FakeyMail-New Message}!{% endblock %}
+{% block title %}FakeyMail-New Message!{% endblock %}
 {% block body %}
+<div class="example-wrapper">
      <h2 class="h3 mb-3 font-weight-light title">New Message:</h2>
-
-    {{ form_start(newMessageForm) }}
-        {{ form_row(newMessageForm.subject,
-            {label: 'Subject :  ' })}}
+     </div>
+    <div style="border:1px solid black;padding:3em;margin-left:0.1em;background:rgba(9, 116, 237, 0.4);font-size:1.1em;">
+        {{ form_start(newMessageForm) }}
+            {{ form_row(newMessageForm.subject,
+                {label: 'Subject :  ' })}}
+                <br/>
+            {{ form_row(newMessageForm.message,
+            { label: 'Message :  ' })}}
             <br/>
-        {{ form_row(newMessageForm.message,
-           { label: 'Message :  ' })}}
-           <br/>
-        {{ form_row(newMessageForm.recipient, {
-            label: 'Recipient :  '
-        }) }}
-        <br/>
-        {{ form_row(newMessageForm.image)}}
-        <br/>
-        {{ form_row(newMessageForm.file)}}
-        <br/>
-        <button type="submit" class="btn">Send Message</button>
-    {{ form_end(newMessageForm) }}
+            {# {{ form_row(newMessageForm.recipient, {
+                label: 'Recipient or recipients:  '
+            }) }} #}
+            <label for="recipients"> Recipient (s):</label>
+            <select name="recipients[]" id="recipients" multiple>
+                {% for u in users %}
+                <option value="{{u.email}}">{{u.email}}</option>
+                {% endfor %}
+            </select>
+            <p style="color:red;font-size:0.8em;">Hold down Ctrl and click to select multiple options. </p>
+        
+            {{ form_row(newMessageForm.image)}}
+            
+            <br/>
+            {{ form_row(newMessageForm.file)}}
+            <p style="color:red;font-size:0.8em;">File sharing only available for single recipient messages. </p>
+            <button type="submit" class="btn">Send Message</button>
+        {{ form_end(newMessageForm) }}
+        
+    </div>
 {%endblock%}
