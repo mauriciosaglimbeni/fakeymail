@@ -34,10 +34,10 @@
         {%block sidebar%}
         <nav style="background:rgba(20, 99, 187, 1);font-size:1.1em;wdith:100%;margin:-1.6%;margin-bottom:0;">
             <h1 class="fakeygram"> Fakey-Mail</h1>
-            <span ><a "href="/newMessage">New Message</a></span>
-            <span><a href="/dashboard" ">Inbox</a></span>
-            <span><a href="/outbox" ">Outbox</a></span>
-            <span><a href="/logout" ">Log-Out</a></span>
+            <span ><a href="/newMessage" >New Message</a></span>
+            <span><a href="/dashboard" >Inbox</a></span>
+            <span><a href="/outbox" >Outbox</a></span>
+            <span><a href="/logout" >Log-Out</a></span>
             <span><a href={{'/profile?email='~app.user.email}}>  <img src="{{ asset('uploads/'~app.user.pfp) }}"style="height:50px;width:50px;border-radius:50%;top:1.3em;right:2em;border:black solid 0.5px;" alt="pfp here"/></a></span>  
         </nav>
          {% endblock %}
