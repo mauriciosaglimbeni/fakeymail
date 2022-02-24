@@ -15,13 +15,13 @@
             {{ form_row(newMessageForm.message,
             { label: 'Message :  ' })}}
             <br/>
-            {# {{ form_row(newMessageForm.recipient, {
-                label: 'Recipient or recipients:  '
-            }) }} #}
+
             <label for="recipients"> Recipient (s):</label>
-            <select name="recipients[]" id="recipients" multiple>
+            <select name="recipients[]" id="recipients" multiple style="height:10em;width:15em;">
                 {% for u in users %}
-                <option value="{{u.email}}">{{u.email}}</option>
+                {% if u != app.user.email %}
+                    <option value="{{u.email}}">{{u.email}}</option>
+                {% endif %}
                 {% endfor %}
             </select>
             <p style="color:red;font-size:0.8em;">Hold down Ctrl and click to select multiple options. </p>
