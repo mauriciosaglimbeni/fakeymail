@@ -17,6 +17,12 @@ span a{
     margin-left:5%;
 
 }
+span a:hover{
+    color: white;
+}
+span a > img:hover{
+    border: white 5px solid;
+}
 span img{
     float:right;position:relative;top:19px;right:16px;
 }

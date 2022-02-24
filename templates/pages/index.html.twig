@@ -18,7 +18,7 @@
 
                 <td> <b>{{message.subject}}</b></td>
 
-                <td> {{message.getCreatedAt()|date("H:i m/d/Y ") }}</td>
+                <td> {{message.getCreatedAt()|date("H:i d/m/Y ") }}</td>
 
                 {% if message.getIsRead() == false %}
                    <td style="font-weight:bold;color:red:"> Not read</td>

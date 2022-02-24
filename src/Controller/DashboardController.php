@@ -9,9 +9,6 @@ use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints\Length;
-
 /**   
  @IsGranted("ROLE_USER")
 */

@@ -12,14 +12,17 @@
             .bt{
                   background-color: rgba(210, 245, 255, 1);
                     border: none;
-                    color: white;
+                    color: black;
                     padding: 10px 32px;
                     text-align: center;
                     text-decoration: none;
                     display: inline-block;
-                    font-size: 16px;
+                    font-size: 14px;
                     margin: 4px 2px;
                     cursor: pointer;
+            }
+            .bt:hover{
+                background-color:gray;
             }
             th{
                 position:relative;
@@ -38,7 +41,7 @@
             <span><a href="/dashboard" >Inbox</a></span>
             <span><a href="/outbox" >Outbox</a></span>
             <span><a href="/logout" >Log-Out</a></span>
-            <span><a href={{'/profile?email='~app.user.email}}>  <img src="{{ asset('uploads/'~app.user.pfp) }}"style="height:50px;width:50px;border-radius:50%;top:1.3em;right:2em;border:black solid 0.5px;" alt="pfp here"/></a></span>  
+            <span><a href={{'/profile?email='~app.user.email}} > <img src="{{ asset('uploads/'~app.user.pfp) }}"style="height:50px;width:50px;border-radius:50%;top:1.3em;right:2em;border:black solid 0.5px;" alt="pfp here"/></a></span>  
         </nav>
          {% endblock %}
         {% block body %}{% endblock %}

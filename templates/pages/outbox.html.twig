@@ -21,7 +21,7 @@
 
                 <td> <b>{{message.subject}}</b></td>
 
-                <td> {{message.getCreatedAt()|date("H:i m/d/Y ") }}</td>
+                <td> {{message.getCreatedAt()|date("H:i d/m/Y ") }}</td>
 
                 {% if message.getImage() != NULL or message.getFile() != NULL %}
                     <td> <i class="fa fa-paperclip" style="font-size:24px"></i></td>

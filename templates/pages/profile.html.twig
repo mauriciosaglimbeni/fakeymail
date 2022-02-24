@@ -1,14 +1,38 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
  <link href="{{ asset('styles.css') }}" type="text/css" rel="stylesheet" />
-</style>
 {% endblock %}
-{% block title %}FakeyMail-Profile {{app.user.name}}!
+{% block title %}FakeyMail-Profile {{user.name}}!
 {% endblock %}
 {% block body %}
 
     <div class="example-wrapper">
         <h2 class="title">{{user.getName()}}'s Profile!</h2>
-
+    </div>
+    <div style="border:1px solid black;padding:3em;margin-left:0.1em;background:rgba(9, 116, 237, 0.4);font-size:1.1em;">
+        <div style="width:225px;height:225px; border:black 5px solid;background: url({{ asset('uploads/'~user.getPfp()) }});background-size:contain;border-radius:50%">
+        </div>
+        <form style="position:relative;bottom:225px;left:265px">
+                <label for="email"> E-mail : </label><br>
+                <input type="text" id="email" name="email" value='{{user.email}}' readonly style="color:gray;cursor:none;"/><br><br>
+        {% if user.email == app.user.email %}
+                <label for="email"> Name :  </label><br>
+                <input type="text" id="name" name="name" value='{{user.name}}'/><br><br>
+                <label for="status"> Status :  </label><br>
+                <input type="text" id="status" name="status" value='{{user.status}}' style="height:3em;"/><br><br>
+                <label for="age"> Age :  </label><br>
+                <input type="number" id="age" name="age" value='{{user.age}}'/><br><br>
+                <input type="file" id="pfp" name="pfp" accept="image/jpeg, image/png, image/gif"><br><br>
+                <button type="submit" class="bt">Change Profile!</button>
+            </form>
+        {% else %}
+                <label for="email"> Name :  </label><br>
+                <input type="text" id="name" name="name" value='{{user.name}}'readonly/><br><br>
+                <label for="status"> Status :  </label><br>
+                <input type="text" id="status" name="status" value='{{user.status}}' style="height:3em;"readonly/><br><br>
+                <label for="age"> Age :  </label><br>
+                <input type="number" id="age" name="age" value='{{user.age}}'readonly/><br><br>
+            </form>
+        {% endif %}
     </div>
 {% endblock %}

@@ -39,9 +39,12 @@ class NewMessageController extends AbstractController
             // Checking the form and making sure it was succesful
 
             if ($form->isSubmitted() && $form->isValid()) {
-                // breaking out of the loop when it reaches the selected recipient count
+                // breaking out of the loop when it reaches the selected recipient count and redirecting to the outbox
                 if ($i == count($_POST['recipients'])) {
-                    break;
+                    // redirects to the outbox route
+                    return $this->redirectToRoute('outbox');
+                    break; 
+
                 }
                 // image settings
                 $img = $form->get('image')->getData();
@@ -109,10 +112,10 @@ class NewMessageController extends AbstractController
                 $entityManager->persist($message);
                 $entityManager->flush(); 
 
-            // redirects to the outbox route
-            return $this->redirectToRoute('outbox');
+            
             }
         }
+
         return $this->render('pages/newMessage.html.twig', [
             'newMessageForm' => $form->createView(),
             'users' => $users
