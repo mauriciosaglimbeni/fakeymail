@@ -10,7 +10,7 @@
         <h2 class="title">{{user.getName()}}'s Profile!</h2>
     </div>
     <div style="border:1px solid black;padding:3em;margin-left:0.1em;background:rgba(9, 116, 237, 0.4);font-size:1.1em;">
-        <div style="width:225px;height:225px; border:black 5px solid;background: url({{ asset('uploads/'~user.getPfp()) }});background-size:cover;border-radius:50%">
+        <div style="width:225px;height:225px; border:black 5px solid;background: url({{ asset('uploads/'~user.getPfp()) }});border-radius:50%;background-size:225px 225px;">
         </div>
         <form style="position:relative;bottom:225px;left:265px" method="POST" enctype='multipart/form-data'>
                 <label for="email"> E-mail : </label><br>

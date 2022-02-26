@@ -17,7 +17,7 @@
             <br/>
 
             <label for="recipients"> Recipient (s):</label>
-            <select name="recipients[]" id="recipients" multiple style="height:10em;width:15em;">
+            <select name="recipients[]" id="recipients" multiple style="height:10em;width:15em;" required>
                 {% for u in users %}
                 {% if u != app.user.email %}
                     <option value="{{u.email}}">{{u.email}}</option>
@@ -31,7 +31,7 @@
             <br/>
             {{ form_row(newMessageForm.file)}}
             <p style="color:red;font-size:0.8em;">File sharing only available for single recipient messages. </p>
-            <button type="submit" class="btn">Send Message</button>
+            <button type="submit" class="bt">Send Message</button>
         {{ form_end(newMessageForm) }}
         
     </div>

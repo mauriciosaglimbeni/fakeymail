@@ -16,20 +16,23 @@
            <tr><th>To</th><th>Subject</th><th>Date</th></tr>
             {% set i = 0 %}
             {% for message in messages %}
+                    <tr><td>{{message.recipient}} <a href={{"/profile?email=#{recipient[i].email}"}}><img src="{{ asset('uploads/'~recipient[i].pfp) }}" style="height:25px;width:25px;border-radius:50%;border:black solid 0.5px;margin-left:5px;"/></a></td>
 
-                <tr><td>{{message.recipient}} <a href={{"/profile?email=#{recipient[i].email}"}}><img src="{{ asset('uploads/'~recipient[i].pfp) }}" style="height:25px;width:25px;border-radius:50%;border:black solid 0.5px;margin-left:5px;"/></a></td>
+                    <td> <b>{{message.subject}}</b></td>
 
-                <td> <b>{{message.subject}}</b></td>
-
-                <td> {{message.getCreatedAt()|date("H:i d/m/Y ") }}</td>
-
-                {% if message.getImage() != NULL or message.getFile() != NULL %}
-                    <td> <i class="fa fa-paperclip" style="font-size:24px"></i></td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-                <td><button class="bt"><a href={{"/seeMessage?id=#{message.id}"}} class="no-deco">View  </a></td>
-                </tr>
+                    <td> {{message.getCreatedAt()|date("H:i d/m/Y ") }}</td>
+                    {% if message.getIsRead() == false %}
+                    <td style="font-weight:bold;color:red:"> Not read</td>
+                    {% else %}
+                        <td > Read</td>
+                    {% endif %}
+                    {% if message.getImage() != NULL or message.getFile() != NULL %}
+                        <td> <i class="fa fa-paperclip" style="font-size:24px"></i></td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                    <td><button class="bt"><a href={{"/seeMessage?id=#{message.id}"}} class="no-deco">View  </a></td>
+                    </tr>
                 {% set i = i + 1 %}
             {% endfor %}
         </table>

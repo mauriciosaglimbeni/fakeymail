@@ -24,8 +24,9 @@ use Symfony\Component\Validator\Constraints\Length;
 class NewMessageController extends AbstractController
 {
     #[Route('/newMessage', name: 'newMessage')]
-    public function newMsg(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager, UserRepository $userRepository, ManagerRegistry $doctrine): Response
+    public function newMsg(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager, UserRepository $userRepository, MessagesRepository $messageRepository, ManagerRegistry $doctrine): Response
     {
+        // getting the current user data
         /** @var \App\Entity\User */
         $user = $this->getUser();
         // getting all users
@@ -37,36 +38,30 @@ class NewMessageController extends AbstractController
             $form = $this->createForm(MessageFormType::class, $message);
             $form->handleRequest($request);
             // Checking the form and making sure it was succesful
-
             if ($form->isSubmitted() && $form->isValid()) {
-                // breaking out of the loop when it reaches the selected recipient count and redirecting to the outbox
+                // breaking out of the loop when it reaches the selected recipient count so it doesnt send more messages
                 if ($i == count($_POST['recipients'])) {
-                    // redirects to the outbox route
-                    return $this->redirectToRoute('outbox');
-                    break; 
-
+                    break;
                 }
                 // image settings
                 $img = $form->get('image')->getData();
                 if ($img) {
-                    
-                        $originalFilename = pathinfo($img->getClientOriginalName(), PATHINFO_FILENAME);
-                        // this is needed to safely include the file name as part of the URL
-                        $safeFilename = $slugger->slug($originalFilename);
-                        $newFilename = $safeFilename . '-' . uniqid() . '.' . $img->guessExtension();
-                        // try {
-                            $img->move(
-                                $this->getParameter('uploads'),
-                                $newFilename
-                            );
-                        // } catch (FileException $e) {
-                        //     // ... handle exception if something happens during file upload
-                        //     echo ("Could not upload image");
-                        // }
-                    
+
+                    $originalFilename = pathinfo($img->getClientOriginalName(), PATHINFO_FILENAME);
+                    // this is needed to safely include the file name as part of the URL
+                    $safeFilename = $slugger->slug($originalFilename);
+                    $newFilename = $safeFilename . '-' . uniqid() . '.' . $img->guessExtension();
+                    // try {
+                    $img->move(
+                        $this->getParameter('uploads'),
+                        $newFilename
+                    );
+                    // } catch (FileException $e) {
+                    //     // ... handle exception if something happens during file upload
+                    //     echo ("Could not upload image");
+                    // }
                     $message->setImage($newFilename);
                 }
-
                 // file settings
                 $fl = $form->get('file')->getData();
                 if ($fl) {
@@ -110,9 +105,10 @@ class NewMessageController extends AbstractController
                 $recipient = $_POST['recipients'][$i];
                 $message->setRecipient("$recipient");
                 $entityManager->persist($message);
-                $entityManager->flush(); 
+                $entityManager->flush();
 
-            
+                // redirects to the outbox route
+                return $this->redirectToRoute('outbox');
             }
         }
 

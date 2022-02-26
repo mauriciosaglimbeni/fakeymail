@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+ <link href="{{ asset('styles.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+{% block title %}FakeyMail-New Message!{% endblock %}
+{% block body %}
+<div class="example-wrapper">
+     <h2 class="h3 mb-3 font-weight-light title">Replying to {{prevMsg.getSender()}}</h2>
+     </div>
+    <div style="border:1px solid black;padding:3em;margin-left:0.1em;background:rgba(9, 116, 237, 0.4);font-size:1.1em;">
+        {{ form_start(replyForm) }}
+           <label for="subject">Subject : </label>
+           <input type="text" readonly name="subject" id="subject" value="RE:{{prevMsg.getSubject()}}"> </br></br>
+            {{ form_row(replyForm.message,
+            { label: 'Message :  ' })}}
+            <br/>
+
+            <label for="recipients"> Recipient :</label>
+            <input type="text" readonly name="subject" id="subject" value="{{prevMsg.getSender()}}"></br></br>
+            {{ form_row(replyForm.image)}}
+            <br/>
+            {{ form_row(replyForm.file)}}</br></br>
+            <button type="submit" class="bt">Send Message</button>
+        {{ form_end(replyForm) }}
+        
+    </div>
+{%endblock%}

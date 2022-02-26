@@ -9,8 +9,23 @@
     </div>
     <div class="msgBox" style="margin-left:0.1em;border:1px black solid;;padding:2em;background:rgba(9, 116, 237, 0.4);font-size:1.1em;">
         <span class="subtitle">Subject: </span><h2 class="title" style="margin-left: 1em;">{{message.getSubject()}}</h2>
-        <span class="subtitle"> From:  <u>{{message.sender}}</u></span>
-        <span class="subtitle" style="margin-left:15px;"> To:  <u>{{message.recipient}}</u></span>
+        {% if message.sender == app.user.email%}
+        <span > From: You (<u>{{message.sender}}</u>)
+         <a style="display:inline-block;position:relative;bottom:10px;margin-left:20px;" href={{"/profile?email=#{message.sender}"}}><img src="{{ asset('uploads/'~app.user.pfp) }}" style="height:25px;width:25px;border-radius:50%;border:black solid 0.5px;"/></a>
+        </span>
+        <br>
+        <span> To:  {{otherUser.name}} (<u>{{message.recipient}}</u>)
+        <a style="display:inline-block;position:relative;bottom:10px;margin-left:20px;" href={{"/profile?email=#{message.recipient}"}}><img src="{{ asset('uploads/'~otherUser.pfp) }}" style="height:25px;width:25px;border-radius:50%;border:black solid 0.5px;"/></a>
+        </span>
+        {% else %}
+        <span > From: {{otherUser.name}} (<u>{{message.sender}}</u>)
+        <a style="display:inline-block;position:relative;bottom:10px;margin-left:20px;" href={{"/profile?email=#{message.sender}"}}><img src="{{ asset('uploads/'~otherUser.pfp) }}" style="height:25px;width:25px;border-radius:50%;border:black solid 0.5px;"/></a>
+        </span>
+        <br>
+        <span> To:  You (<u>{{message.recipient}}</u>)
+        <a style="display:inline-block;position:relative;bottom:10px;margin-left:20px;" href={{"/profile?email=#{message.recipient}"}}><img src="{{ asset('uploads/'~app.user.pfp) }}" style="height:25px;width:25px;border-radius:50%;border:black solid 0.5px;"/></a>
+        </span>
+        {% endif %}
         <br/>
         <br/>
          <span class="subtitle"> Message:</span>
@@ -22,6 +37,10 @@
             <embed src="{{asset('uploads/'~message.file) }}" width="250" height="250" 
                 type="application/pdf">
          {%endif%}
+         {% if message.sender != app.user.email %}
+         <br>
+            <button class="bt" ><a href={{"/reply?id=#{message.id}"}} class="no-deco">Reply </a>
+        {% endif %}
     </div>
 
 {% endblock %}
