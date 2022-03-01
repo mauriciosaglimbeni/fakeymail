@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+// controller dependencies 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\AppCustomAuthenticator;

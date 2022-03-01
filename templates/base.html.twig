@@ -35,6 +35,7 @@
     </head>
     <body>
         {%block sidebar%}
+        {# On this html.twig we set the navbar for the whole page and some styles, the only interesting thing is that we can get the current logged user information anywhere on the templates by using: app.user.info like in the img tag #}
         <nav style="background:rgba(20, 99, 187, 1);font-size:1.1em;wdith:100%;margin:-1.6%;margin-bottom:0;">
             <h1 class="fakeygram"> Fakey-Mail</h1>
             <span ><a href="/newMessage" >New Message</a></span>

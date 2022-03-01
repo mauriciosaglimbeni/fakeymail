@@ -7,10 +7,11 @@
 {% block body %}
 <div class="example-wrapper">
     <h2 class="title">Inbox</h2>
-
+{# When messages exist #}
     {%if messages != null%} 
         <table  cellspacing="20" cellpadding="5" style="border:black 1px solid; width:103%;background:rgba(9, 116, 237, 0.4); margin-left:-1.2em;font-size:1.1em;">        
            <tr><th>From</th><th>Subject</th><th>Date</th></tr>
+           {# We create a variable to get each recipients information for each message, and then we add 1 to this variable at the end so it goes at the same time as the for each   #}
            {% set i = 0 %}
             {% for message in messages %}
 
@@ -19,7 +20,7 @@
                 <td> <b>{{message.subject}}</b></td>
 
                 <td> {{message.getCreatedAt()|date("H:i d/m/Y ") }}</td>
-
+{# If the message  is not read some styles appear, if it isn´t, there are no styles #}   
                 {% if message.getIsRead() == false %}
                    <td style="font-weight:bold;color:red:"> Not read</td>
                 {% else %}

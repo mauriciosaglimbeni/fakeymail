@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+// controller dependencies 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Entity\Users;
 use App\Entity\Messages;
@@ -23,6 +23,7 @@ use Symfony\Component\Validator\Constraints\Length;
  */
 class NewMessageController extends AbstractController
 {
+    // routing
     #[Route('/newMessage', name: 'newMessage')]
     public function newMsg(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager, UserRepository $userRepository, MessagesRepository $messageRepository, ManagerRegistry $doctrine): Response
     {
@@ -39,8 +40,10 @@ class NewMessageController extends AbstractController
             $form->handleRequest($request);
             // Checking the form and making sure it was succesful
             if ($form->isSubmitted() && $form->isValid()) {
-                // breaking out of the loop when it reaches the selected recipient count so it doesnt send more messages
+                // breaking out of the loop when it reaches the selected recipient count so it doesnt send more messages 
                 if ($i == count($_POST['recipients'])) {
+                    // redirects to the outbox route
+                    return $this->redirectToRoute('outbox');
                     break;
                 }
                 // image settings
@@ -51,15 +54,15 @@ class NewMessageController extends AbstractController
                     // this is needed to safely include the file name as part of the URL
                     $safeFilename = $slugger->slug($originalFilename);
                     $newFilename = $safeFilename . '-' . uniqid() . '.' . $img->guessExtension();
-                    // try {
+                     try {
                     $img->move(
                         $this->getParameter('uploads'),
                         $newFilename
                     );
-                    // } catch (FileException $e) {
-                    //     // ... handle exception if something happens during file upload
-                    //     echo ("Could not upload image");
-                    // }
+                     } catch (FileException $e) {
+                         // ... handle exception if something happens during file upload
+                         echo ("Could not upload image");
+                     }
                     $message->setImage($newFilename);
                 }
                 // file settings
@@ -100,18 +103,17 @@ class NewMessageController extends AbstractController
                 $today = new \DateTimeImmutable('now');
                 $message->setCreatedAt($today);
 
-                // saves the recipient and creates a message
-
+                // saves the recipient
                 $recipient = $_POST['recipients'][$i];
                 $message->setRecipient("$recipient");
+
+                // saves the message in the database
                 $entityManager->persist($message);
                 $entityManager->flush();
-
-                // redirects to the outbox route
-                return $this->redirectToRoute('outbox');
             }
-        }
 
+        }
+        // returns the new message template with the form (see MessageFormType.php) and all users.
         return $this->render('pages/newMessage.html.twig', [
             'newMessageForm' => $form->createView(),
             'users' => $users

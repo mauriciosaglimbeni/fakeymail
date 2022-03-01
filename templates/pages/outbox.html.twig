@@ -14,15 +14,16 @@
     {%if messages != null%} 
         <table  cellspacing="20" cellpadding="5" style="border:black 1px solid; width:103%;background:rgba(9, 116, 237, 0.4); margin-left:-1.2em;font-size:1.1em;">        
            <tr><th>To</th><th>Subject</th><th>Date</th></tr>
+    {# We create a variable to get each sender´s information for each message, and then we add 1 to this variable at the end so it goes at the same time as the for each   #}
             {% set i = 0 %}
             {% for message in messages %}
                     <tr><td>{{message.recipient}} <a href={{"/profile?email=#{recipient[i].email}"}}><img src="{{ asset('uploads/'~recipient[i].pfp) }}" style="height:25px;width:25px;border-radius:50%;border:black solid 0.5px;margin-left:5px;"/></a></td>
 
                     <td> <b>{{message.subject}}</b></td>
-
                     <td> {{message.getCreatedAt()|date("H:i d/m/Y ") }}</td>
+    {# If the message  is not read some styles appear, if it isn´t, there are no styles #}   
                     {% if message.getIsRead() == false %}
-                    <td style="font-weight:bold;color:red:"> Not read</td>
+                    <td style="font-weight:bold;"> Not read</td>
                     {% else %}
                         <td > Read</td>
                     {% endif %}
@@ -37,6 +38,7 @@
             {% endfor %}
         </table>
     {%else%}
+{# if there are no messages this text appears #}
         <h3 class="alert"> No sent messages yet!</h3>
     {%endif%}
     

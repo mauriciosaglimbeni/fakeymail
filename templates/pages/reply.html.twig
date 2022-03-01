@@ -8,13 +8,15 @@
      <h2 class="h3 mb-3 font-weight-light title">Replying to {{prevMsg.getSender()}}</h2>
      </div>
     <div style="border:1px solid black;padding:3em;margin-left:0.1em;background:rgba(9, 116, 237, 0.4);font-size:1.1em;">
+{# Code comes from the form type #}
         {{ form_start(replyForm) }}
+    {# since this is a reply, the subject is the same as the previous message only with a RE: added before  and can´t be changed #}
            <label for="subject">Subject : </label>
            <input type="text" readonly name="subject" id="subject" value="RE:{{prevMsg.getSubject()}}"> </br></br>
             {{ form_row(replyForm.message,
             { label: 'Message :  ' })}}
             <br/>
-
+ {# Recipient is the sender of the previous message and can´t be changed  #}
             <label for="recipients"> Recipient :</label>
             <input type="text" readonly name="subject" id="subject" value="{{prevMsg.getSender()}}"></br></br>
             {{ form_row(replyForm.image)}}

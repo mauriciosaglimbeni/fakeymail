@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+// controller dependencies
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Entity\User;
 use App\Repository\UserRepository;
@@ -15,21 +16,24 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 */
 class ProfileController extends AbstractController
 {
+    // routing
     #[Route('/profile', name: 'profile')]
 
     public function index(UserRepository $userRepository ,SluggerInterface $slugger,EntityManagerInterface $entityManager): Response
     {
+        // we get the current user data
             /** @var \App\Entity\User */
             $currentUser = $this->getUser();
-
+        // we get the value received on the GET to see which user´s profile we are seeing and we find that information and save it on user
             $email = $_GET['email'];
             $user = $userRepository->findOneBy([
                 'email' => $email
             ]);
            
-
+            // we check if the logged user is the profile user, if it is, we treat the change profile form with vanilla php, else, we only show information
             if($email == $currentUser->getEmail()){
                 
+                // Form handling in vanilla PHP
                 if(isset($_POST['submit'])){
                     if(isset($_POST['name'])){
                         if(empty($_POST["name"])){
@@ -57,10 +61,12 @@ class ProfileController extends AbstractController
                         $user->setPfp($filename);
 
                     } 
+                    // Updating the database
                         $entityManager->persist($currentUser);
                         $entityManager->flush(); 
                 }
             }
+            // return profile render with the profile user we got from the get
             return $this->render('pages/profile.html.twig',[
                 'user' => $user
             ]);

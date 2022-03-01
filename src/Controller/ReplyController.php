@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+// controller dependencies
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Entity\Users;
 use App\Entity\Messages;
@@ -98,6 +98,7 @@ class ReplyController extends AbstractController
             // redirects to the outbox route
             return $this->redirectToRoute('outbox');
         }
+        // returns the template with the form (see ReplyForm.php) and the previous message information
         return $this->render('pages/reply.html.twig', [
             'replyForm' => $form->createView(),
             'prevMsg' => $prevMsg

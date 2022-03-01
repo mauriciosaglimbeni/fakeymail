@@ -15,6 +15,7 @@
         <form style="position:relative;bottom:225px;left:265px" method="POST" enctype='multipart/form-data'>
                 <label for="email"> E-mail : </label><br>
                 <input type="text" id="email" name="email" value='{{user.email}}' readonly style="color:gray;cursor:none;"/><br><br>
+{# This if block creates a form if the profile we are seeing is the logged user´s profile, to allow him to customize his profile #}
         {% if user.email == app.user.email %}
                 <label for="name"> Name :  </label><br>
                 <input type="text" id="name" name="name" value='{{user.name}}' required/><br><br>
@@ -26,6 +27,7 @@
                 <button type="submit" name="submit" class="bt">Change Profile!</button>
             </form>
         {% else %}
+{# Else we can only see the user´s data #}
                 <label for="email"> Name :  </label><br>
                 <input type="text" id="name" name="name" value='{{user.name}}'readonly/><br><br>
                 <label for="status"> Status :  </label><br>

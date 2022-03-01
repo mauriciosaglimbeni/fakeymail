@@ -8,6 +8,7 @@
      <h2 class="h3 mb-3 font-weight-light title">New Message:</h2>
      </div>
     <div style="border:1px solid black;padding:3em;margin-left:0.1em;background:rgba(9, 116, 237, 0.4);font-size:1.1em;">
+ {# Form starting from the messageFormType #}
         {{ form_start(newMessageForm) }}
             {{ form_row(newMessageForm.subject,
                 {label: 'Subject :  ' })}}
@@ -15,7 +16,7 @@
             {{ form_row(newMessageForm.message,
             { label: 'Message :  ' })}}
             <br/>
-
+{# The recipients are done in vanilla php because the formtype from symfony doesn´t allow multiple recipients (couldn´t solve it) #}
             <label for="recipients"> Recipient (s):</label>
             <select name="recipients[]" id="recipients" multiple style="height:10em;width:15em;" required>
                 {% for u in users %}

@@ -16,6 +16,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "encore": "^0.0.30-beta",
         "file-loader": "^6.2.0"
     }
 }
